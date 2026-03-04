@@ -17,8 +17,8 @@ class PromptInjectionResult(BaseModel):
 
     @property
     def is_suspicious(self) -> bool:
-        # Treat moderately high scores as suspicious in this MVP.
-        return self.score >= 0.5
+        # In this MVP, any single strong heuristic match is enough to flag.
+        return self.score >= 0.3
 
 
 class PromptInjectionHeuristics:
