@@ -1,0 +1,11 @@
+[project]
+name = "mcp-core"
+version = "0.1.0"
+description = "Core types, config, and logging for the SenCivic MCP Stack."
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic==2.11.0",
+  "pydantic-settings==2.6.1",
+  "orjson==3.10.7",
+]
+

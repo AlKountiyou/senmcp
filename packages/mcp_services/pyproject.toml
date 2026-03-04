@@ -1,0 +1,12 @@
+[project]
+name = "mcp-services"
+version = "0.1.0"
+description = "Administrative services MCP server for SenCivic MCP Stack."
+requires-python = ">=3.11"
+dependencies = [
+  "mcp-core==0.1.0",
+  "mcp-trust==0.1.0",
+  "mcp[http]==1.26.0",
+  "pyyaml==6.0.2",
+]
+

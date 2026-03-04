@@ -1,0 +1,22 @@
+{
+  "datasets": [
+    {
+      "id": "population_dakar",
+      "title": "Population de la région de Dakar par année",
+      "description": "Estimations annuelles de population pour la région de Dakar, agrégées par année civile.",
+      "source": "Agence Nationale de la Statistique et de la Démographie (ANSD)",
+      "url": "https://example.org/dakar/population",
+      "updated_at": "2024-12-31T00:00:00+00:00"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ansd_population",
+      "title": "ANSD - Statistiques de population",
+      "url": "https://example.org/ansd/population",
+      "accessed_at": "2025-01-10T12:00:00+00:00",
+      "snippet": "Séries statistiques officielles de population pour les régions du Sénégal."
+    }
+  ]
+}
+
