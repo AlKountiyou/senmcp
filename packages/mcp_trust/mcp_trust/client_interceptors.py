@@ -8,6 +8,7 @@ from mcp_core.logging import get_logger
 
 from mcp_trust.audit import JsonlAuditLogger
 from mcp_trust.policies import PromptInjectionHeuristics
+from mcp_trust.utils import json_dump_safe
 
 
 async def trust_safety_interceptor(request: Any, handler: Callable[[Any], Awaitable[Any]]) -> Any:
@@ -70,14 +71,3 @@ async def trust_safety_interceptor(request: Any, handler: Callable[[Any], Awaita
     )
 
     return result
-
-
-def json_dump_safe(value: Any) -> str:
-    """Serialize a value to JSON for heuristics without raising."""
-
-    try:
-        import json
-
-        return json.dumps(value, default=str)
-    except Exception:
-        return str(value)

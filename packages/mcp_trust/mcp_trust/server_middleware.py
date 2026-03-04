@@ -15,6 +15,7 @@ from mcp_trust.policies import (
     build_default_allowlist_policy,
 )
 from mcp_trust.provenance import ProvenanceManager
+from mcp_trust.utils import json_dump_safe
 
 T = TypeVar("T")
 
@@ -92,14 +93,3 @@ async def with_trust_safety(
     )
 
     return result
-
-
-def json_dump_safe(value: Any) -> str:
-    """Serialize a value to JSON for heuristics without raising."""
-
-    try:
-        import json
-
-        return json.dumps(value, default=str)
-    except Exception:
-        return str(value)
