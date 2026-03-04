@@ -1,0 +1,36 @@
+id: permis_construire
+title: Demande de permis de construire
+description: >
+  Autorisation administrative préalable à la construction ou à la modification d'un bâtiment.
+category: urbanisme
+requirements:
+  summary: >
+    Le demandeur doit être propriétaire du terrain ou disposer d'une autorisation écrite du propriétaire.
+  profile_keys: ["proprietaire", "localisation_terrain", "type_travaux"]
+documents:
+  - name: Titre de propriété ou bail
+    description: Justificatif du droit à construire sur le terrain.
+    required: true
+  - name: Plan de masse et plans architecturaux
+    description: Plans signés par un professionnel habilité.
+    required: true
+  - name: Avis du service technique (si applicable)
+    description: Avis ou étude d'impact en fonction de la nature du projet.
+    required: false
+steps:
+  - order: 1
+    title: Constitution du dossier
+    description: Rassembler l'ensemble des pièces techniques et administratives.
+  - order: 2
+    title: Dépôt à la mairie ou au service d'urbanisme
+    description: Déposer le dossier de demande de permis dans la commune concernée.
+  - order: 3
+    title: Instruction et décision
+    description: Le service examine le dossier et notifie l'acceptation ou le refus.
+fees: >
+  Taxes d'urbanisme et frais d'instruction variables selon la commune et le projet.
+official_sources:
+  - label: Direction de l'Urbanisme - Permis de construire (placeholder)
+    url: https://example.org/urbanisme/permis-construire
+    last_checked: "2025-01-10"
+

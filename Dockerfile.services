@@ -1,0 +1,13 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --no-cache-dir mcp==1.26.0 && \
+    pip install --no-cache-dir .
+
+ENV RUN_MODE=docker
+
+CMD ["python", "-m", "mcp_services.server"]
+

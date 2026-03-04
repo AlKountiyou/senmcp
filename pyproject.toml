@@ -1,0 +1,47 @@
+[project]
+name = "sencivic-mcp-stack"
+version = "0.1.0"
+description = "SenCivic MCP Stack: open data and services MCP servers plus LangChain/LangGraph agent for Senegal civic use-cases."
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "SenCivic Contributors" }
+]
+dependencies = [
+  "agent-app==0.1.0",
+]
+
+[tool.uv.workspace]
+members = [
+  "packages/mcp_core",
+  "packages/mcp_trust",
+  "packages/mcp_opendata",
+  "packages/mcp_services",
+  "packages/agent_app",
+]
+
+[tool.uv.sources]
+mcp-core = { workspace = true }
+mcp-trust = { workspace = true }
+mcp-opendata = { workspace = true }
+mcp-services = { workspace = true }
+agent-app = { workspace = true }
+
+[dependency-groups]
+dev = [
+  "ruff==0.6.8",
+  "mypy==1.11.2",
+  "pytest==8.3.3",
+  "pytest-asyncio==0.23.8",
+  "langchain-mcp-adapters==0.2.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff==0.6.8",
+  "mypy==1.11.2",
+  "pytest==8.3.3",
+  "pytest-asyncio==0.23.8",
+]
+

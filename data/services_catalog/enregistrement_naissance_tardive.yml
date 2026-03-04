@@ -1,0 +1,33 @@
+id: enregistrement_naissance_tardive
+title: Enregistrement tardif d'une naissance
+description: >
+  Procédure permettant de déclarer une naissance au-delà du délai légal.
+category: etat_civil
+requirements:
+  summary: >
+    Le déclarant doit justifier du lien avec l'enfant et expliquer les raisons du retard de déclaration.
+  profile_keys: ["lien_enfant", "age_enfant", "motif_retard"]
+documents:
+  - name: Témoignages ou attestations
+    description: Déclarations de témoins ou attestations d'autorités locales.
+    required: true
+  - name: Certificat médical ou document de santé
+    description: Si disponible, pour attester de la naissance.
+    required: false
+steps:
+  - order: 1
+    title: Saisine du tribunal compétent
+    description: Déposer une requête pour autorisation d'enregistrement tardif.
+  - order: 2
+    title: Audience et décision
+    description: Le juge examine le dossier et rend une décision.
+  - order: 3
+    title: Transcription à l'état civil
+    description: En cas d'accord, transcription de la naissance au registre d'état civil.
+fees: >
+  Frais de justice éventuels et frais d'actes administratifs, selon la réglementation en vigueur.
+official_sources:
+  - label: Ministère de la Justice - Procédures d'état civil (placeholder)
+    url: https://example.org/justice/enregistrement-naissance-tardive
+    last_checked: "2025-01-10"
+

@@ -1,0 +1,19 @@
+{
+  "indicators": {
+    "taux_de_croissance_population_dakar": {
+      "explanation": "Le taux de croissance de la population de la région de Dakar mesure l'évolution annuelle de la population résidente. Il est généralement exprimé en pourcentage par rapport à l'année précédente.",
+      "caveats": "Les estimations peuvent être révisées après les recensements généraux. Les mouvements migratoires saisonniers ou informels peuvent ne pas être entièrement capturés.",
+      "citations": [
+        {
+          "id": "ansd_population",
+          "title": "ANSD - Statistiques de population",
+          "url": "https://example.org/ansd/population",
+          "accessed_at": "2025-01-10T12:00:00+00:00",
+          "snippet": "Séries statistiques officielles de population pour les régions du Sénégal.",
+          "source_id": "ansd_population"
+        }
+      ]
+    }
+  }
+}
+

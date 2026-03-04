@@ -1,0 +1,35 @@
+id: carte_sejour_etranger
+title: Demande de carte de séjour pour étranger
+description: >
+  Délivrance ou renouvellement de la carte de séjour pour les ressortissants étrangers
+  résidant au Sénégal.
+category: immigration
+requirements:
+  summary: >
+    Le demandeur doit disposer d'un passeport en cours de validité et d'un motif de séjour
+    reconnu (travail, études, regroupement familial, etc.).
+  profile_keys: ["nationalite", "motif_sejour", "date_entree"]
+documents:
+  - name: Passeport
+    description: Passeport en cours de validité.
+    required: true
+  - name: Contrat de travail ou certificat de scolarité
+    description: Justificatif du motif de séjour.
+    required: true
+steps:
+  - order: 1
+    title: Dépôt du dossier à la police des étrangers
+    description: Déposer le dossier complet au service compétent de la police.
+  - order: 2
+    title: Instruction du dossier
+    description: Vérification des pièces et éventuelle convocation.
+  - order: 3
+    title: Retrait de la carte de séjour
+    description: Retirer la carte de séjour à la date indiquée.
+fees: >
+  Droits de timbre et frais administratifs à régler lors du dépôt du dossier.
+official_sources:
+  - label: Ministère de l'Intérieur - Informations aux étrangers (placeholder)
+    url: https://example.org/interieur/etrangers
+    last_checked: "2025-01-10"
+

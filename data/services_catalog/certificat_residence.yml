@@ -1,0 +1,33 @@
+id: certificat_residence
+title: Demande de certificat de résidence
+description: >
+  Attestation officielle du lieu de résidence délivrée par la mairie ou le chef de quartier.
+category: etat_civil
+requirements:
+  summary: >
+    Le demandeur doit résider effectivement dans la commune concernée.
+  profile_keys: ["nom", "adresse", "duree_residence"]
+documents:
+  - name: Pièce d'identité
+    description: Carte d'identité ou autre document officiel.
+    required: true
+  - name: Justificatif de domicile
+    description: Facture ou quittance de loyer récente.
+    required: false
+steps:
+  - order: 1
+    title: Présentation au guichet
+    description: Se présenter à la mairie ou au chef de quartier avec les pièces requises.
+  - order: 2
+    title: Vérification sur le terrain (éventuelle)
+    description: Une visite de contrôle peut être effectuée en fonction des pratiques locales.
+  - order: 3
+    title: Délivrance du certificat
+    description: Retrait du certificat de résidence signé.
+fees: >
+  Frais administratifs symboliques, éventuellement gratuits selon la commune.
+official_sources:
+  - label: Informations communales sur le certificat de résidence (placeholder)
+    url: https://example.org/commune/certificat-residence
+    last_checked: "2025-01-10"
+

@@ -1,0 +1,33 @@
+id: carte_identite_nationale
+title: Demande de carte d'identité nationale
+description: >
+  Délivrance ou renouvellement de la carte d'identité nationale pour les citoyens sénégalais.
+category: etat_civil
+requirements:
+  summary: >
+    Le demandeur doit être de nationalité sénégalaise et disposer d'un extrait de naissance.
+  profile_keys: ["age", "nationalite", "residence"]
+documents:
+  - name: Extrait de naissance
+    description: Extrait de naissance datant de moins de 3 mois.
+    required: true
+  - name: Justificatif de domicile
+    description: Facture d'électricité, d'eau ou certificat de résidence.
+    required: true
+steps:
+  - order: 1
+    title: Préparation du dossier
+    description: Rassembler les pièces justificatives et remplir le formulaire de demande.
+  - order: 2
+    title: Dépôt en mairie ou préfecture
+    description: Déposer le dossier complet au centre d'état civil compétent.
+  - order: 3
+    title: Retrait de la carte
+    description: Retirer la carte d'identité une fois la demande traitée.
+fees: >
+  Frais de dossier variables selon la commune (souvent symboliques).
+official_sources:
+  - label: Portail officiel de l'administration sénégalaise (placeholder)
+    url: https://example.org/admin-senegal/cni
+    last_checked: "2025-01-10"
+

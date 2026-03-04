@@ -1,0 +1,37 @@
+id: creation_entreprise_individuelle
+title: Création d'une entreprise individuelle
+description: >
+  Formalités de création d'une entreprise individuelle pour exercer une activité commerciale
+  ou artisanale.
+category: entreprise
+requirements:
+  summary: >
+    Le porteur de projet doit être majeur et disposer d'une adresse professionnelle au Sénégal.
+  profile_keys: ["age", "type_activite", "adresse_professionnelle"]
+documents:
+  - name: Pièce d'identité du promoteur
+    description: Carte d'identité ou passeport.
+    required: true
+  - name: Contrat de bail ou attestation de domiciliation
+    description: Justificatif de l'adresse professionnelle.
+    required: true
+  - name: Déclaration fiscale
+    description: Formulaire de déclaration auprès de l'administration fiscale.
+    required: true
+steps:
+  - order: 1
+    title: Dépôt du dossier au guichet unique
+    description: Déposer le dossier complet au guichet unique de création d'entreprise si disponible.
+  - order: 2
+    title: Immatriculation au registre du commerce
+    description: Obtention du numéro RCCM et des identifiants fiscaux.
+  - order: 3
+    title: Retrait des documents d'immatriculation
+    description: Récupérer les attestations et certificats nécessaires à l'activité.
+fees: >
+  Frais d'immatriculation et de publication légale, variables selon le type d'activité.
+official_sources:
+  - label: Agence de développement et d'encadrement des PME (ADEPME) - Création d'entreprise (placeholder)
+    url: https://example.org/entreprises/creation
+    last_checked: "2025-01-10"
+

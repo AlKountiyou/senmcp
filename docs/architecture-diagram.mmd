@@ -1,0 +1,14 @@
+flowchart TD
+  userCli["CLI sencivic"] --> agentApp[AgentApp]
+  agentApp --> mcpClient[MultiServerMCPClient]
+  mcpClient --> trustInterceptors[ClientTrustInterceptors]
+  mcpClient --> opendataServer[McpOpendata]
+  mcpClient --> servicesServer[McpServices]
+  opendataServer --> opendataTrust[ServerTrustMiddleware]
+  servicesServer --> servicesTrust[ServerTrustMiddleware]
+  opendataServer --> opendataSources[StaticCatalogSource/HttpHtmlSource]
+  servicesServer --> servicesYaml[YamlServiceRepository]
+  trustInterceptors --> auditLogs[JsonlAuditLogger]
+  opendataTrust --> auditLogs
+  servicesTrust --> auditLogs
+
