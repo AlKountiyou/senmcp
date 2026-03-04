@@ -1,0 +1,38 @@
+id: bourse_etudes_superieures
+title: Demande de bourse d'études supérieures
+description: >
+  Attribution d'une bourse d'études pour les étudiants inscrits dans un établissement
+  d'enseignement supérieur reconnu.
+category: education
+requirements:
+  summary: >
+    L'étudiant doit être inscrit dans un établissement supérieur et satisfaire à des
+    critères académiques et sociaux définis par l'autorité compétente.
+  profile_keys: ["etablissement", "niveau_etudes", "revenu_familial"]
+documents:
+  - name: Certificat d'inscription
+    description: Attestation d'inscription dans l'établissement supérieur.
+    required: true
+  - name: Relevés de notes
+    description: Derniers relevés de notes disponibles.
+    required: true
+  - name: Attestation de revenus des parents ou tuteurs
+    description: Document émis par l'administration fiscale ou autre justificatif.
+    required: true
+steps:
+  - order: 1
+    title: Retrait et remplissage du formulaire
+    description: Renseigner le formulaire de demande de bourse.
+  - order: 2
+    title: Dépôt du dossier
+    description: Déposer le dossier complet dans les délais indiqués.
+  - order: 3
+    title: Publication des résultats
+    description: Consulter la liste des bénéficiaires publiée par l'administration.
+fees: >
+  La demande de bourse est généralement gratuite, des frais de dossier modestes peuvent s'appliquer.
+official_sources:
+  - label: Ministère de l'Enseignement supérieur - Bourses (placeholder)
+    url: https://example.org/mesr/bourses
+    last_checked: "2025-01-10"
+

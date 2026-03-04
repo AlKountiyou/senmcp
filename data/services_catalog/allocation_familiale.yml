@@ -1,0 +1,37 @@
+id: allocation_familiale
+title: Demande d'allocation familiale
+description: >
+  Prestation destinée à soutenir les familles ayant des enfants à charge.
+category: protection_sociale
+requirements:
+  summary: >
+    Le demandeur doit résider au Sénégal et avoir des enfants à charge remplissant les
+    conditions d'âge et de scolarisation prévues.
+  profile_keys: ["nombre_enfants", "ages_enfants", "revenu_menage"]
+documents:
+  - name: Actes de naissance des enfants
+    description: Copies des actes de naissance de chaque enfant à charge.
+    required: true
+  - name: Certificats de scolarité
+    description: Pour les enfants en âge scolaire.
+    required: false
+  - name: Justificatif de revenus
+    description: Bulletin de salaire ou attestation de revenus.
+    required: true
+steps:
+  - order: 1
+    title: Retrait ou téléchargement du formulaire
+    description: Obtenir le formulaire auprès du service social compétent ou en ligne.
+  - order: 2
+    title: Dépôt du dossier
+    description: Déposer le dossier complet dans le centre social de rattachement.
+  - order: 3
+    title: Décision et mise en paiement
+    description: Notification de la décision et, en cas d'accord, mise en paiement des allocations.
+fees: >
+  Gratuit. Aucun frais de dossier n'est généralement exigé.
+official_sources:
+  - label: Caisse de sécurité sociale - Allocations familiales (placeholder)
+    url: https://example.org/css/allocations-familiales
+    last_checked: "2025-01-10"
+

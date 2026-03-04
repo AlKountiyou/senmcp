@@ -1,0 +1,30 @@
+id: extrait_naissance
+title: Demande d'extrait de naissance
+description: >
+  Obtention d'un extrait de naissance auprès du centre d'état civil du lieu de naissance.
+category: etat_civil
+requirements:
+  summary: >
+    La demande peut être faite par l'intéressé ou un proche muni d'une procuration simple.
+  profile_keys: ["nom", "prenom", "date_naissance", "lieu_naissance"]
+documents:
+  - name: Pièce d'identité du demandeur
+    description: Carte d'identité ou passeport.
+    required: true
+steps:
+  - order: 1
+    title: Dépôt de la demande
+    description: Remplir le formulaire et préciser les informations d'état civil.
+  - order: 2
+    title: Paiement des frais
+    description: Régler les frais de délivrance, s'ils sont applicables.
+  - order: 3
+    title: Retrait de l'extrait
+    description: Retirer l'extrait de naissance au guichet.
+fees: >
+  Frais modestes susceptibles de varier selon la commune.
+official_sources:
+  - label: Centre d'état civil - Informations pratiques (placeholder)
+    url: https://example.org/etat-civil/extrait-naissance
+    last_checked: "2025-01-10"
+

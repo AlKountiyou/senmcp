@@ -1,0 +1,36 @@
+id: immatriculation_vehicule
+title: Immatriculation d'un véhicule
+description: >
+  Première immatriculation ou changement de propriétaire d'un véhicule.
+category: transport
+requirements:
+  summary: >
+    Le propriétaire doit disposer d'un titre de propriété et d'une assurance valide.
+  profile_keys: ["type_vehicule", "proprietaire", "usage"]
+documents:
+  - name: Facture ou certificat de cession
+    description: Justificatif de propriété du véhicule.
+    required: true
+  - name: Certificat de conformité
+    description: Document attestant que le véhicule est conforme aux normes.
+    required: true
+  - name: Attestation d'assurance
+    description: Assurance responsabilité civile au minimum.
+    required: true
+steps:
+  - order: 1
+    title: Préparation du dossier
+    description: Rassembler les pièces justificatives et remplir le formulaire d'immatriculation.
+  - order: 2
+    title: Dépôt au service des transports
+    description: Déposer le dossier complet au service régional des transports.
+  - order: 3
+    title: Attribution du numéro et remise des plaques
+    description: Récupérer le certificat d'immatriculation et les plaques si elles sont fournies.
+fees: >
+  Droits d'immatriculation et coût des plaques, selon le type de véhicule.
+official_sources:
+  - label: Ministère des Transports - Immatriculation (placeholder)
+    url: https://example.org/transports/immatriculation
+    last_checked: "2025-01-10"
+
