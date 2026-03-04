@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from typing import Any
 
 from mcp.server.fastmcp import FastMCP
@@ -19,6 +20,7 @@ from mcp_services.usecases.steps_uc import StepsUseCase
 mcp = FastMCP("SenCivic Services MCP Server", json_response=True)
 
 
+@lru_cache(maxsize=1)
 def _build_dependencies() -> dict[str, Any]:
     core_settings = get_core_settings()
     services_settings = get_services_settings()
