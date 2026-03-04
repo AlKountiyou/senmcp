@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from typing import Any
 
 from mcp.server.fastmcp import FastMCP
@@ -19,6 +20,7 @@ from mcp_opendata.usecases.search_dataset_uc import SearchDatasetUseCase
 mcp = FastMCP("SenCivic Open Data MCP Server", json_response=True)
 
 
+@lru_cache(maxsize=1)
 def _build_dependencies() -> dict[str, Any]:
     core_settings = get_core_settings()
     opendata_settings = get_opendata_settings()
