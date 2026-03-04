@@ -1,0 +1,17 @@
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "B", "I", "UP", "S"]
+ignore = []
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+"packages/agent_app/agent_app/main.py" = ["B008"]
+"packages/mcp_core/mcp_core/config.py" = ["S104"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
