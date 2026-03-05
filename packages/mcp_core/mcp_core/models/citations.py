@@ -14,3 +14,4 @@ class Citation(BaseModel):
     accessed_at: datetime
     snippet: str | None = None
     source_id: str | None = None
+    file_hash: str | None = None

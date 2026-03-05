@@ -39,3 +39,48 @@ class CitationRepository(ABC):
     @abstractmethod
     def cite_source(self, source_id: str) -> Citation:
         raise NotImplementedError
+
+
+class AnsdCatalogPort(ABC):
+    """Port for searching ANSD catalog metadata."""
+
+    @abstractmethod
+    def search(self, query: str, limit: int = 10) -> list[DatasetItem]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_dataset(self, dataset_id: str) -> DatasetItem:
+        raise NotImplementedError
+
+
+class AnsdTablePort(ABC):
+    """Port for fetching ANSD-backed tables."""
+
+    @abstractmethod
+    def fetch_table(self, dataset_id: str, filters: dict[str, Any] | None = None) -> SeriesTable:
+        raise NotImplementedError
+
+
+class CkanCatalogPort(ABC):
+    """Port for searching CKAN (AgriData) catalog metadata."""
+
+    @abstractmethod
+    def search(self, query: str, limit: int = 10) -> list[DatasetItem]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_dataset(self, dataset_id: str) -> DatasetItem:
+        raise NotImplementedError
+
+    @abstractmethod
+    def list_resources(self, dataset_id: str) -> list[dict[str, Any]]:
+        raise NotImplementedError
+
+
+class CkanTablePort(ABC):
+    """Port for fetching CKAN-backed tables."""
+
+    @abstractmethod
+    def fetch_table(self, dataset_id: str, filters: dict[str, Any] | None = None) -> SeriesTable:
+        raise NotImplementedError
+

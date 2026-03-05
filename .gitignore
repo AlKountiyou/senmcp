@@ -9,4 +9,5 @@ build/
 *.egg-info/
 .DS_Store
 logs/
-
+.cache/
+.env

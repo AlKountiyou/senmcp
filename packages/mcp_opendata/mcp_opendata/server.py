@@ -9,6 +9,9 @@ from mcp_trust.audit import JsonlAuditLogger
 from mcp_trust.provenance import ProvenanceManager
 from mcp_trust.server_middleware import with_trust_safety
 
+from mcp_opendata.adapters.ansd.ckan_agridata import CkanAgriDataAdapter
+from mcp_opendata.adapters.ansd.download_adapter import AnsdDownloadAdapter
+from mcp_opendata.adapters.ansd.web_catalog import AnsdWebCatalogAdapter
 from mcp_opendata.adapters.static_catalog_source import StaticCatalogSource
 from mcp_opendata.config import get_settings as get_opendata_settings
 from mcp_opendata.usecases.cite_source_uc import CiteSourceUseCase
@@ -24,11 +27,20 @@ mcp = FastMCP("SenCivic Open Data MCP Server", json_response=True)
 def _build_dependencies() -> dict[str, Any]:
     core_settings = get_core_settings()
     opendata_settings = get_opendata_settings()
-    catalog = StaticCatalogSource(opendata_settings.assets_dir)
+    local_repo = StaticCatalogSource(opendata_settings.assets_dir)
+    ansd_catalog = AnsdWebCatalogAdapter()
+    ansd_table = AnsdDownloadAdapter(ansd_catalog)
+    ckan_adapter = CkanAgriDataAdapter()
+    ckan_catalog = ckan_adapter
+    ckan_table = ckan_adapter
     provenance = ProvenanceManager()
     audit_logger = JsonlAuditLogger(core_settings.audit_opendata_path)
     return {
-        "catalog": catalog,
+        "local_repo": local_repo,
+        "ansd_catalog": ansd_catalog,
+        "ansd_table": ansd_table,
+        "ckan_catalog": ckan_catalog,
+        "ckan_table": ckan_table,
         "provenance": provenance,
         "audit_logger": audit_logger,
     }
@@ -36,10 +48,14 @@ def _build_dependencies() -> dict[str, Any]:
 
 @mcp.tool()
 async def search_dataset(query: str, limit: int = 10) -> dict[str, Any]:
-    """Search datasets from the static catalog."""
+    """Search datasets from the local catalog and live ANSD/CKAN sources."""
 
     deps = _build_dependencies()
-    usecase = SearchDatasetUseCase(deps["catalog"])
+    usecase = SearchDatasetUseCase(
+        local_repo=deps["local_repo"],
+        ansd_catalog=deps["ansd_catalog"],
+        ckan_catalog=deps["ckan_catalog"],
+    )
 
     async def handler(params: dict[str, Any], ctx: Any) -> dict[str, Any]:
         items = usecase.execute(query=params["query"], limit=params.get("limit", 10))
@@ -65,7 +81,11 @@ async def get_series(dataset_id: str, filters: dict[str, Any] | None = None) -> 
     """Get a table for a given dataset."""
 
     deps = _build_dependencies()
-    usecase = GetSeriesUseCase(deps["catalog"])
+    usecase = GetSeriesUseCase(
+        local_repo=deps["local_repo"],
+        ansd_table=deps["ansd_table"],
+        ckan_table=deps["ckan_table"],
+    )
 
     async def handler(params: dict[str, Any], ctx: Any) -> dict[str, Any]:
         table = usecase.execute(dataset_id=params["dataset_id"], filters=params.get("filters"))
@@ -91,7 +111,7 @@ async def explain_indicator(indicator_name: str, context: str | None = None) -> 
     """Explain a socio-economic indicator, with caveats and citations."""
 
     deps = _build_dependencies()
-    usecase = ExplainIndicatorUseCase(deps["catalog"])
+    usecase = ExplainIndicatorUseCase(deps["local_repo"])
 
     async def handler(params: dict[str, Any], ctx: Any) -> dict[str, Any]:
         expl = usecase.execute(
@@ -118,7 +138,12 @@ async def download_table(dataset_id: str, fmt: str = "csv") -> dict[str, Any]:
     """Download a dataset table as CSV or JSON."""
 
     deps = _build_dependencies()
-    usecase = DownloadTableUseCase(deps["catalog"])
+    get_series_uc = GetSeriesUseCase(
+        local_repo=deps["local_repo"],
+        ansd_table=deps["ansd_table"],
+        ckan_table=deps["ckan_table"],
+    )
+    usecase = DownloadTableUseCase(get_series_uc)
 
     async def handler(params: dict[str, Any], ctx: Any) -> dict[str, Any]:
         out = usecase.execute(dataset_id=params["dataset_id"], fmt=params.get("fmt", "csv"))
@@ -142,7 +167,7 @@ async def cite_source(source_id: str) -> dict[str, Any]:
     """Retrieve citation details for a known data source."""
 
     deps = _build_dependencies()
-    usecase = CiteSourceUseCase(deps["catalog"])
+    usecase = CiteSourceUseCase(deps["local_repo"])
 
     async def handler(params: dict[str, Any], ctx: Any) -> dict[str, Any]:
         citation = usecase.execute(source_id=params["source_id"])

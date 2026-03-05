@@ -11,7 +11,17 @@ services:
       MCP_HTTP_PORT: "8000"
       MCP_HTTP_PATH: "/mcp"
     ports:
-      - "8001:8000"
+      - "8000:8000"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import os,socket,sys; host=os.environ.get('MCP_HTTP_HOST','127.0.0.1'); port=int(os.environ.get('MCP_HTTP_PORT','8000')); s=socket.socket(); s.settimeout(2); s.connect((host,port)); s.close()\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   mcp_services:
     build:
@@ -23,7 +33,17 @@ services:
       MCP_HTTP_PORT: "8000"
       MCP_HTTP_PATH: "/mcp"
     ports:
-      - "8002:8000"
+      - "8001:8000"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import os,socket,sys; host=os.environ.get('MCP_HTTP_HOST','127.0.0.1'); port=int(os.environ.get('MCP_HTTP_PORT','8000')); s=socket.socket(); s.settimeout(2); s.connect((host,port)); s.close()\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   agent_app:
     build:

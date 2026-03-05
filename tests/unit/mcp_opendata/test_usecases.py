@@ -13,15 +13,16 @@ def _assets_dir() -> Path:
 
 def test_search_dataset_returns_results() -> None:
     source = StaticCatalogSource(_assets_dir())
-    usecase = SearchDatasetUseCase(source)
+    usecase = SearchDatasetUseCase(local_repo=source)
     results = usecase.execute("population dakar", limit=5)
     assert results
+    assert all(item.id.startswith("local:") for item in results)
     assert any("Dakar" in item.title for item in results)
 
 
 def test_get_series_returns_table() -> None:
     source = StaticCatalogSource(_assets_dir())
-    usecase = GetSeriesUseCase(source)
+    usecase = GetSeriesUseCase(local_repo=source)
     table = usecase.execute("population_dakar", filters=None)
     assert table.columns
     assert table.rows
