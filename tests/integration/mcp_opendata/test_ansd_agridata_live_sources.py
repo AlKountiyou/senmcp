@@ -13,7 +13,6 @@ from mcp_opendata.adapters.ansd.ckan_agridata import CkanAgriDataAdapter
 from mcp_opendata.adapters.ansd.download_adapter import AnsdDownloadAdapter
 from mcp_opendata.adapters.ansd.web_catalog import AnsdWebCatalogAdapter
 
-
 pytestmark = pytest.mark.filterwarnings(
     "ignore:The 'strip_cdata' option of HTMLParser.*:DeprecationWarning"
 )
