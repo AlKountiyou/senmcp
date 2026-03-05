@@ -2,6 +2,7 @@ from __future__ import annotations
 
 # mypy: ignore-errors
 import asyncio
+import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Any
@@ -33,8 +34,19 @@ async def run_opendata_http_server() -> AsyncIterator[None]:
     raises=Exception,
 )
 async def test_http_mode_and_interceptor_audit() -> None:
+    # Configure core settings for HTTP mode and restrict allowlist so remote ANSD/CKAN
+    # adapters gracefully degrade to offline-only behavior (no real network).
+    os.environ.update(
+        {
+            "RUN_MODE": "docker",
+            "MCP_HTTP_HOST": "127.0.0.1",
+            "ALLOWLIST_DOMAINS": '["example.org"]',
+        }
+    )
+    get_core_settings.cache_clear()  # type: ignore[attr-defined]
+
     core = get_core_settings()
-    url = f"http://127.0.0.1:{core.mcp_http_port}{core.mcp_http_path}"
+    url = f"http://{core.mcp_http_host}:{core.mcp_http_port}{core.mcp_http_path}"
 
     async with run_opendata_http_server():
         client = MultiServerMCPClient(
@@ -48,7 +60,22 @@ async def test_http_mode_and_interceptor_audit() -> None:
         )
         tools = await client.get_tools()
         search = next(t for t in tools if t.name == "search_dataset")
-        result: dict[str, Any] = await search.ainvoke({"query": "population dakar", "limit": 3})
-        assert "structuredContent" in result
-        items: list[dict[str, Any]] = result["structuredContent"]["items"]
+        get_series = next(t for t in tools if t.name == "get_series")
+
+        search_result: dict[str, Any] = await search.ainvoke(
+            {"query": "population dakar", "limit": 3}
+        )
+        assert "structuredContent" in search_result
+        items: list[dict[str, Any]] = search_result["structuredContent"]["items"]
         assert items
+
+        dataset_id = items[0]["id"]
+        series_result: dict[str, Any] = await get_series.ainvoke(
+            {"dataset_id": dataset_id, "filters": None}
+        )
+        assert "structuredContent" in series_result
+        table = series_result["structuredContent"]["table"]
+        assert table["columns"]
+        assert table["rows"]
+        # Offline assets already include citations; ensure they are surfaced.
+        assert "citations" in table
