@@ -27,8 +27,26 @@ class CoreSettings(BaseSettings):
     audit_services_path: str = Field("./logs/audit-services.jsonl", alias="AUDIT_SERVICES_PATH")
     audit_agent_path: str = Field("./logs/audit-agent.jsonl", alias="AUDIT_AGENT_PATH")
 
-    request_timeout_seconds: float = Field(10.0, alias="REQUEST_TIMEOUT_SECONDS")
-    max_http_response_bytes: int = Field(512_000, alias="MAX_HTTP_RESPONSE_BYTES")
+    http_rate_limit_per_host: float = Field(
+        1.0,
+        alias="HTTP_RATE_LIMIT_PER_HOST",
+        description="Maximum number of outbound HTTP requests per second for a single host.",
+    )
+    http_cache_ttl_seconds: int = Field(
+        86_400,
+        alias="HTTP_CACHE_TTL_SECONDS",
+        description="TTL in seconds for HTTP disk cache entries.",
+    )
+    http_timeout_seconds: float = Field(
+        10.0,
+        alias="HTTP_TIMEOUT_SECONDS",
+        description="Per-request timeout in seconds for outbound HTTP calls.",
+    )
+    http_max_bytes: int = Field(
+        10_000_000,
+        alias="HTTP_MAX_BYTES",
+        description="Maximum number of bytes to read from any single HTTP response body.",
+    )
 
 
 @lru_cache(maxsize=1)
